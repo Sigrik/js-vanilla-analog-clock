@@ -1,14 +1,50 @@
 .container {
   height: 600px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.clock-face {
+#clock-face {
+  align-items: center;
+  justify-content: center;
+  display: flex;
   height: 400px;
   width: 400px;
   border-radius: 50%;
   border: 2px solid black;
+  margin-bottom: 24px;
+}
+
+#clock-middle {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  background: black;
+}
+
+.hour-mark {
+  position: absolute;
+  height: 30px;
+  width: 10px;
+  background: black;
+  transform: translateY(-186px);
+}
+
+.minute-mark {
+  position: absolute;
+  height: 15px;
+  width: 6px;
+  background: rgb(87, 87, 87);
+  transform: translateY(-193px);
+}
+
+.hour-number {
+  font-size: 24px;
+}
+
+.hour-number-container {
+  position: absolute;
+  transform: translateY(-150px);
 }
