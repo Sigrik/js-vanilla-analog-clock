@@ -1,11 +1,14 @@
-const analogHour = document.getElementById("clock-hour");
-const analogMinute = document.getElementById("clock-minute");
-const analogSecond = document.getElementById("clock-second");
+const analogHourHand = document.createElement("div");
+const analogMinuteHand = document.createElement("div");
+const analogSecondHand = document.createElement("div");
 const digitalClock = document.getElementById("clock-digital");
 let date = new Date();
 let hour = date.getHours();
 let minute = date.getMinutes();
 let second = date.getSeconds();
+analogHourHand.classList.add("hour-hand");
+analogMinuteHand.classList.add("minute-hand");
+analogSecondHand.classList.add("second-hand");
 
 function renderClock(container) {
   let hourDegree = 0;
@@ -27,24 +30,37 @@ function renderClock(container) {
     hourDegree += 30;
   }
   for (let i = 0; i < 60; i++) {
-    // minute is 6 degrees, 4 bars between every hour, skip every 5th by adding 2x degree starting with the first
-    console.log(minuteDegree);
     const minuteMark = document.createElement("div");
     minuteMark.classList.add("minute-mark");
     minuteMark.style.rotate = `${minuteDegree + "deg"}`;
     container.appendChild(minuteMark);
     minuteDegree += 6;
   }
+  container.appendChild(analogHourHand);
+  container.appendChild(analogMinuteHand);
+  container.appendChild(analogSecondHand);
 }
 
 renderClock(document.getElementById("clock-face"));
 
-function updateAnalog() {}
+let secondDegree = second * 6;
+let minuteDegree = minute * 6;
+let hourDegree = hour * 30 + minuteDegree / 12;
+
+function updateAnalog() {
+  analogSecondHand.style.rotate = `${secondDegree + "deg"}`;
+  analogMinuteHand.style.rotate = `${minuteDegree + "deg"}`;
+  analogHourHand.style.rotate = `${hourDegree + "deg"}`;
+  secondDegree = second * 6 + 6;
+  minuteDegree = minute * 6;
+  hourDegree = hour * 30 + minuteDegree / 12;
+}
 
 function updateDigital() {
   digitalClock.innerHTML = `The time is: ${hour + ":" + minute + ":" + second}`;
 }
 
+updateAnalog();
 updateDigital();
 
 setInterval(() => {
