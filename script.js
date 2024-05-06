@@ -2,10 +2,13 @@ const analogHourHand = document.createElement("div");
 const analogMinuteHand = document.createElement("div");
 const analogSecondHand = document.createElement("div");
 const digitalClock = document.getElementById("clock-digital");
-let date = new Date();
-let hour = date.getHours();
-let minute = date.getMinutes();
+const date = new Date();
 let second = date.getSeconds();
+let minute = date.getMinutes();
+let hour = date.getHours();
+let secondDegree = second * 6;
+let minuteDegree = minute * 6;
+let hourDegree = hour * 30 + minuteDegree / 12;
 analogHourHand.classList.add("hour-hand");
 analogMinuteHand.classList.add("minute-hand");
 analogSecondHand.classList.add("second-hand");
@@ -43,10 +46,6 @@ function renderClock(container) {
 
 renderClock(document.getElementById("clock-face"));
 
-let secondDegree = second * 6;
-let minuteDegree = minute * 6;
-let hourDegree = hour * 30 + minuteDegree / 12;
-
 function updateAnalog() {
   analogSecondHand.style.rotate = `${secondDegree + "deg"}`;
   analogMinuteHand.style.rotate = `${minuteDegree + "deg"}`;
@@ -63,6 +62,7 @@ function updateDigital() {
 updateAnalog();
 updateDigital();
 
+// change to high resolution timer
 setInterval(() => {
   date.setTime(Date.now());
   hour = date.getHours();
