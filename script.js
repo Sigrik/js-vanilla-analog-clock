@@ -1,6 +1,9 @@
 const analogHourHand = document.createElement("div");
 const analogMinuteHand = document.createElement("div");
 const analogSecondHand = document.createElement("div");
+const analogClockMiddle = document.createElement("div");
+const analogClockMiddleRed = document.createElement("div");
+const analogClockFace = document.createElement("div");
 const digitalClock = document.getElementById("clock-digital");
 const date = new Date();
 let second = date.getSeconds();
@@ -12,6 +15,9 @@ let hourDegree = hour * 30 + minuteDegree / 12;
 analogHourHand.classList.add("hour-hand");
 analogMinuteHand.classList.add("minute-hand");
 analogSecondHand.classList.add("second-hand");
+analogClockFace.classList.add("clock-face");
+analogClockMiddle.classList.add("clock-middle");
+analogClockMiddleRed.classList.add("clock-middle-red");
 
 function renderClock(container) {
   let hourDegree = 0;
@@ -28,23 +34,26 @@ function renderClock(container) {
     hourNumberContainer.style.rotate = `${hourDegree + 30 + "deg"}`;
     hourNumber.innerHTML = i + 1;
     hourNumberContainer.appendChild(hourNumber);
-    container.appendChild(hourMark);
-    container.appendChild(hourNumberContainer);
+    analogClockFace.appendChild(hourMark);
+    analogClockFace.appendChild(hourNumberContainer);
     hourDegree += 30;
   }
   for (let i = 0; i < 60; i++) {
     const minuteMark = document.createElement("div");
     minuteMark.classList.add("minute-mark");
     minuteMark.style.rotate = `${minuteDegree + "deg"}`;
-    container.appendChild(minuteMark);
+    analogClockFace.appendChild(minuteMark);
     minuteDegree += 6;
   }
-  container.appendChild(analogHourHand);
-  container.appendChild(analogMinuteHand);
-  container.appendChild(analogSecondHand);
+  analogClockFace.appendChild(analogClockMiddle);
+  analogClockFace.appendChild(analogClockMiddleRed);
+  analogClockFace.appendChild(analogHourHand);
+  analogClockFace.appendChild(analogMinuteHand);
+  analogClockFace.appendChild(analogSecondHand);
+  container.appendChild(analogClockFace);
 }
 
-renderClock(document.getElementById("clock-face"));
+renderClock(document.getElementById("main"));
 
 function updateAnalog() {
   analogSecondHand.style.rotate = `${secondDegree + "deg"}`;
