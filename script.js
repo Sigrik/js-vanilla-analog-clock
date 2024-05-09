@@ -62,12 +62,24 @@ function updateDigital() {
 updateAnalog();
 updateDigital();
 
-// change to high resolution timer
-setInterval(() => {
+function runInterval() {
+  const startTime = performance.now();
   date.setTime(Date.now());
   hour = date.getHours();
   minute = date.getMinutes();
   second = date.getSeconds();
   updateAnalog();
   updateDigital();
-}, 1000);
+
+  function nextInterval() {
+    const elapsedTime = performance.now() - startTime;
+    if (elapsedTime >= 1000) {
+      runInterval();
+    } else {
+      requestAnimationFrame(nextInterval);
+    }
+  }
+  requestAnimationFrame(nextInterval);
+}
+
+runInterval();
