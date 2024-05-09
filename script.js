@@ -2,7 +2,6 @@ const analogHourHand = document.createElement("div");
 const analogMinuteHand = document.createElement("div");
 const analogSecondHand = document.createElement("div");
 const analogClockMiddle = document.createElement("div");
-const analogClockMiddleRed = document.createElement("div");
 const analogClockFace = document.createElement("div");
 const digitalClock = document.getElementById("clock-digital");
 const date = new Date();
@@ -17,7 +16,6 @@ analogMinuteHand.classList.add("minute-hand");
 analogSecondHand.classList.add("second-hand");
 analogClockFace.classList.add("clock-face");
 analogClockMiddle.classList.add("clock-middle");
-analogClockMiddleRed.classList.add("clock-middle-red");
 
 function renderClock(container) {
   let hourDegree = 0;
@@ -46,7 +44,6 @@ function renderClock(container) {
     minuteDegree += 6;
   }
   analogClockFace.appendChild(analogClockMiddle);
-  analogClockFace.appendChild(analogClockMiddleRed);
   analogClockFace.appendChild(analogHourHand);
   analogClockFace.appendChild(analogMinuteHand);
   analogClockFace.appendChild(analogSecondHand);

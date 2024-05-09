@@ -24,18 +24,10 @@
 .clock-middle {
   position: relative;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  background: black;
-}
-
-.clock-middle-red {
-  position: absolute;
-  border-radius: 50%;
   width: 12px;
   height: 12px;
-  background: rgb(255, 0, 0);
-  z-index: 2;
+  background: red;
+  border: 6px solid black;
 }
 
 .hour-hand {
